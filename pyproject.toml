@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "steelbound"
+version = "1.0.0"
+description = "Steelbound — a local-first AI core. Everything significant, in the ledger, append-only."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "Steelbound Source-Available License v1.0 (see LICENSE)" }
+dependencies = []
+
+[project.scripts]
+steelbound = "steelbound.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+steelbound = ["*.html", "model_data/*/*.npz", "model_data/*/*.json", "model_data/*.json"]
+
+[tool.ruff]
+line-length = 120

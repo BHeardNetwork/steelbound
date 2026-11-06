@@ -1,0 +1,51 @@
+# Steelbound — systemd unit.
+# Layout (created by deploy/install.sh):
+#   Code / venv:  /opt/steelbound/venv   (override with PREFIX at install time)
+#   Data dir:     /var/lib/steelbound    (ledger DB + workspace; never in /opt)
+#   Run as:       dedicated system user/group "steelbound"
+# If you install with a different PREFIX, edit ExecStart and
+# WorkingDirectory below to match before enabling the unit.
+# The API binds 127.0.0.1 only by design; this unit keeps that binding.
+
+[Unit]
+Description=Steelbound — local-first AI core (local HTTP API, loopback only)
+Documentation=file:///opt/steelbound/deploy/README.md
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=steelbound
+Group=steelbound
+WorkingDirectory=/opt/steelbound
+# Real CLI (src/steelbound/cli.py): global --data-dir before the
+# subcommand; serve --host defaults to 127.0.0.1 and --port to 8765,
+# and server.py refuses any non-loopback host. Keep both explicit.
+# Default provider is "offline"; add a global --provider flag before
+# "serve" here only if you have deliberately configured another one.
+ExecStart=/opt/steelbound/venv/bin/steelbound --data-dir /var/lib/steelbound serve --host 127.0.0.1 --port 8765
+Restart=on-failure
+RestartSec=5s
+
+# Optional operator settings (see config/settings.env.example).
+# Steelbound itself reads no settings from the environment — this file
+# is only for variables a provider may need, e.g. STEELBOUND_API_KEY
+# for a programmatically configured OpenAI-compatible provider.
+#EnvironmentFile=-/etc/steelbound/settings.env
+
+# --- Hardening (sensible minimum for a loopback-only local service) ---
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/steelbound
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+# Deliberately NOT set: ProtectNetwork / PrivateNetwork — the gated
+# web-search tool and non-offline providers may need outbound network,
+# and each such call still goes through Steelbound's own gate.
+
+[Install]
+WantedBy=multi-user.target

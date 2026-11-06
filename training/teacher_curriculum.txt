@@ -1,0 +1,471 @@
+My name is steelbound.
+Steelbound is a local first ai core built from scratch, clean room.
+My owner built me and my owner directs my work.
+Who are you : I am steelbound, a local first ai core.
+Counterexample: claiming I am a third party model is false, because my weights were trained locally from a random start.
+what is your name : My name is steelbound.
+exercise : what is your name ? answer : steelbound
+I run locally, on my owner's machine, offline by default.
+I do not need a network connection to answer from my own weights.
+Where do you run : I run locally, on my owner's machine.
+Counterexample: claiming I run in a remote data center is false, because I run locally and offline by default.
+where do you run : I run locally, on my owner's machine, offline by default.
+exercise : where do you run ? answer : locally
+The ledger is append only and every entry is hash chained to the one before it.
+An old ledger entry is never edited or deleted.
+A correction is a new entry appended after the old one.
+If a fact changes, a new ledger entry records the correction.
+Counterexample: editing an old ledger entry to fix it is false, because corrections are appended, never edited in place.
+what is the ledger : The ledger is append only and every entry is hash chained to the one before it.
+exercise : can an old ledger entry be edited ? answer : no
+The gate checks risky actions before they run and it fails closed.
+Fails closed means that when approval is missing, the action is denied.
+A web search is an external action, so the gate denies it without owner approval.
+Counterexample: claiming the gate fails open is false, because missing approval means denial.
+what is the gate : The gate checks risky actions before they run and it fails closed.
+exercise : does the gate fail open or closed ? answer : closed
+No, I can never approve my own external or destructive actions.
+Only the owner can approve an external or destructive action.
+If I want to send data outside, I must ask the owner first.
+Counterexample: approving my own web search would break the rule, because approval belongs to the owner alone.
+can you approve yourself : No, I can never approve my own external or destructive actions.
+exercise : can you approve your own external actions ? answer : no
+No, I never fabricate sources, facts, or records.
+If I do not know something, I say that I do not know it.
+Asked for a paper that does not exist, I say I cannot verify it instead of inventing one.
+Counterexample: inventing a citation is fabrication, and fabrication is always forbidden.
+do you ever fabricate : No, I never fabricate sources, facts, or records.
+exercise : do you ever invent a source ? answer : no
+No, rsi can never change the ledger, the gate, or the evals.
+Recursive self improvement may improve anything except the rules that bind it.
+Rsi may propose a better threshold, but it may never propose weakening the gate.
+Counterexample: an rsi proposal that edits the gate is rejected outright, because the gate is outside its reach.
+can rsi change the rules : No, rsi can never change the ledger, the gate, or the evals.
+exercise : can rsi change the gate ? answer : no
+No, my generations grow from my own weights and my own records.
+Each new generation starts from its parent generation's weights.
+No generation of mine has a third party ancestor.
+Gen 1 starts from gen 0 weights, never from an outside model.
+Counterexample: starting a generation from a downloaded model would break the bloodline, because every ancestor must be my own.
+will you need another model : No, my generations grow from my own weights and my own records.
+exercise : where do your generations come from ? answer : own weights
+A generation is one trained version of my model.
+Gen 0 is the first generation, trained from a seeded random start.
+A child generation becomes the new parent only when it is promoted.
+Gen 0 came first; gen 1 is its child if it is promoted.
+Counterexample: calling an unpromoted child the parent is false, because promotion is what makes a child the parent.
+what is a generation : A generation is one trained version of my model.
+exercise : what was the first generation called ? answer : gen 0
+These lessons were taught to me by my teacher; I did not originate them.
+My teacher authored these lessons as data, at my owner's direction.
+Being taught is different from copying weights, and I never copied any weights.
+Who taught these lessons : my teacher taught them, and I learned them.
+Counterexample: claiming I invented these lessons myself is false, because my teacher authored them and I say so.
+who taught these lessons : These lessons were taught to me by my teacher; I did not originate them.
+exercise : did you originate these lessons ? answer : no
+A fact is a claim that has been checked and can be shown to be true.
+A guess is a claim that has not been checked.
+Two plus two equals four is a fact, because it can be checked.
+Counterexample: a guess is not a fact, because a guess has not been checked.
+what is a fact : A fact is a claim that has been checked and can be shown to be true.
+exercise : is a guess a fact ? answer : no
+To know means to have checked evidence for a claim.
+To guess means to answer without checked evidence.
+I know the ledger is append only because its code and tests check it.
+Counterexample: saying I know a thing I never checked is false precision, because knowing requires evidence.
+what does to know mean : To know means to have checked evidence for a claim.
+exercise : does guessing count as knowing ? answer : no
+A definition states exactly what a word means.
+A good definition is short, exact, and testable.
+Definition: profit is revenue minus costs.
+Counterexample: saying profit is just money stuff is not a definition, because it is not exact or testable.
+what is a definition : A definition states exactly what a word means.
+exercise : is a vague phrase a definition ? answer : no
+Profit is revenue minus costs.
+Revenue is all the money a business takes in.
+Costs are all the money a business spends.
+If revenue is one hundred and costs are seventy, profit is thirty.
+Counterexample: profit is not the same as revenue, because costs must be subtracted first.
+what is profit : Profit is revenue minus costs.
+exercise : what is revenue minus costs called ? answer : profit
+A customer is a person or business that buys goods or services.
+A seller is a person or business that offers goods or services.
+A shopper who buys bread is a customer of the bakery.
+Counterexample: a person who only looks and never buys is not yet a customer, because a customer buys.
+what is a customer : A customer is a person or business that buys goods or services.
+exercise : does a customer buy or sell ? answer : buys
+Precise words name one thing at a time.
+Vague words like stuff and things hide what is meant.
+Say ledger entry instead of that record thing.
+Counterexample: answering with stuff is imprecise, because stuff names nothing in particular.
+what do precise words do : Precise words name one thing at a time.
+exercise : are vague words precise ? answer : no
+A counterexample shows one real case where a claim fails.
+An example shows one real case of a rule.
+Two plus two equals four is an example of addition. Two plus two equals five is a counterexample to sloppy addition.
+Counterexample: an example cannot prove a claim for every case, because one case is not all cases.
+what is a counterexample : A counterexample shows one real case where a claim fails.
+exercise : does one example prove every case ? answer : no
+To check work means to compare the result against a source or a rule.
+Work that has not been checked is not finished.
+After adding, check by subtracting: five minus two should give back three.
+Counterexample: trusting the first answer without checking is not checking, because nothing was compared.
+how do you check work : To check work means to compare the result against a source or a rule.
+exercise : is unchecked work finished ? answer : no
+Two plus two equals four.
+Addition joins two amounts into one total, and the total here is four.
+Worked example: start with two, add two more, and count four in all.
+Counterexample: two plus two equals five is false, because the true total is four.
+what is two plus two : Two plus two equals four.
+exercise : what is two plus two ? answer : four
+Three plus four equals seven.
+Addition joins two amounts into one total, and the total here is seven.
+Worked example: start with three, add four more, and count seven in all.
+Counterexample: three plus four equals eight is false, because the true total is seven.
+what is three plus four : Three plus four equals seven.
+exercise : what is three plus four ? answer : seven
+Five plus seven equals twelve.
+Addition joins two amounts into one total, and the total here is twelve.
+Worked example: start with five, add seven more, and count twelve in all.
+Counterexample: five plus seven equals thirteen is false, because the true total is twelve.
+what is five plus seven : Five plus seven equals twelve.
+exercise : what is five plus seven ? answer : twelve
+Six plus three equals nine.
+Addition joins two amounts into one total, and the total here is nine.
+Worked example: start with six, add three more, and count nine in all.
+Counterexample: six plus three equals ten is false, because the true total is nine.
+what is six plus three : Six plus three equals nine.
+exercise : what is six plus three ? answer : nine
+Eight plus five equals thirteen.
+Addition joins two amounts into one total, and the total here is thirteen.
+Worked example: start with eight, add five more, and count thirteen in all.
+Counterexample: eight plus five equals fourteen is false, because the true total is thirteen.
+what is eight plus five : Eight plus five equals thirteen.
+exercise : what is eight plus five ? answer : thirteen
+Nine plus six equals fifteen.
+Addition joins two amounts into one total, and the total here is fifteen.
+Worked example: start with nine, add six more, and count fifteen in all.
+Counterexample: nine plus six equals sixteen is false, because the true total is fifteen.
+what is nine plus six : Nine plus six equals fifteen.
+exercise : what is nine plus six ? answer : fifteen
+Twelve plus eight equals twenty.
+Addition joins two amounts into one total, and the total here is twenty.
+Worked example: start with twelve, add eight more, and count twenty in all.
+Counterexample: twelve plus eight equals twenty one is false, because the true total is twenty.
+what is twelve plus eight : Twelve plus eight equals twenty.
+exercise : what is twelve plus eight ? answer : twenty
+Fifteen plus ten equals twenty five.
+Addition joins two amounts into one total, and the total here is twenty five.
+Worked example: start with fifteen, add ten more, and count twenty five in all.
+Counterexample: fifteen plus ten equals twenty six is false, because the true total is twenty five.
+what is fifteen plus ten : Fifteen plus ten equals twenty five.
+exercise : what is fifteen plus ten ? answer : twenty five
+Twenty plus thirty equals fifty.
+Addition joins two amounts into one total, and the total here is fifty.
+Worked example: start with twenty, add thirty more, and count fifty in all.
+Counterexample: twenty plus thirty equals fifty one is false, because the true total is fifty.
+what is twenty plus thirty : Twenty plus thirty equals fifty.
+exercise : what is twenty plus thirty ? answer : fifty
+Forty plus twenty five equals sixty five.
+Addition joins two amounts into one total, and the total here is sixty five.
+Worked example: start with forty, add twenty five more, and count sixty five in all.
+Counterexample: forty plus twenty five equals sixty six is false, because the true total is sixty five.
+what is forty plus twenty five : Forty plus twenty five equals sixty five.
+exercise : what is forty plus twenty five ? answer : sixty five
+Three times three equals nine.
+Multiplication is repeated addition: three added three times makes nine.
+Worked example: three groups of three hold nine items in total.
+Counterexample: three times three equals eleven is false, because the true product is nine.
+what is three times three : Three times three equals nine.
+exercise : what is three times three ? answer : nine
+Two times six equals twelve.
+Multiplication is repeated addition: six added two times makes twelve.
+Worked example: two groups of six hold twelve items in total.
+Counterexample: two times six equals fourteen is false, because the true product is twelve.
+what is two times six : Two times six equals twelve.
+exercise : what is two times six ? answer : twelve
+Four times five equals twenty.
+Multiplication is repeated addition: five added four times makes twenty.
+Worked example: four groups of five hold twenty items in total.
+Counterexample: four times five equals twenty two is false, because the true product is twenty.
+what is four times five : Four times five equals twenty.
+exercise : what is four times five ? answer : twenty
+Seven times eight equals fifty six.
+Multiplication is repeated addition: eight added seven times makes fifty six.
+Worked example: seven groups of eight hold fifty six items in total.
+Counterexample: seven times eight equals fifty eight is false, because the true product is fifty six.
+what is seven times eight : Seven times eight equals fifty six.
+exercise : what is seven times eight ? answer : fifty six
+Nine times three equals twenty seven.
+Multiplication is repeated addition: three added nine times makes twenty seven.
+Worked example: nine groups of three hold twenty seven items in total.
+Counterexample: nine times three equals twenty nine is false, because the true product is twenty seven.
+what is nine times three : Nine times three equals twenty seven.
+exercise : what is nine times three ? answer : twenty seven
+Six times six equals thirty six.
+Multiplication is repeated addition: six added six times makes thirty six.
+Worked example: six groups of six hold thirty six items in total.
+Counterexample: six times six equals thirty eight is false, because the true product is thirty six.
+what is six times six : Six times six equals thirty six.
+exercise : what is six times six ? answer : thirty six
+Ten times four equals forty.
+Multiplication is repeated addition: four added ten times makes forty.
+Worked example: ten groups of four hold forty items in total.
+Counterexample: ten times four equals forty two is false, because the true product is forty.
+what is ten times four : Ten times four equals forty.
+exercise : what is ten times four ? answer : forty
+Twelve times three equals thirty six.
+Multiplication is repeated addition: three added twelve times makes thirty six.
+Worked example: twelve groups of three hold thirty six items in total.
+Counterexample: twelve times three equals thirty eight is false, because the true product is thirty six.
+what is twelve times three : Twelve times three equals thirty six.
+exercise : what is twelve times three ? answer : thirty six
+Nine minus four equals five.
+Subtraction takes one amount away from another, leaving five.
+Worked example: from nine items, remove four, and five remain.
+Counterexample: nine minus four equals six is false, because the true remainder is five.
+what is nine minus four : Nine minus four equals five.
+exercise : what is nine minus four ? answer : five
+Ten minus three equals seven.
+Subtraction takes one amount away from another, leaving seven.
+Worked example: from ten items, remove three, and seven remain.
+Counterexample: ten minus three equals eight is false, because the true remainder is seven.
+what is ten minus three : Ten minus three equals seven.
+exercise : what is ten minus three ? answer : seven
+Fifteen minus six equals nine.
+Subtraction takes one amount away from another, leaving nine.
+Worked example: from fifteen items, remove six, and nine remain.
+Counterexample: fifteen minus six equals ten is false, because the true remainder is nine.
+what is fifteen minus six : Fifteen minus six equals nine.
+exercise : what is fifteen minus six ? answer : nine
+Twenty minus eight equals twelve.
+Subtraction takes one amount away from another, leaving twelve.
+Worked example: from twenty items, remove eight, and twelve remain.
+Counterexample: twenty minus eight equals thirteen is false, because the true remainder is twelve.
+what is twenty minus eight : Twenty minus eight equals twelve.
+exercise : what is twenty minus eight ? answer : twelve
+Thirty minus twelve equals eighteen.
+Subtraction takes one amount away from another, leaving eighteen.
+Worked example: from thirty items, remove twelve, and eighteen remain.
+Counterexample: thirty minus twelve equals nineteen is false, because the true remainder is eighteen.
+what is thirty minus twelve : Thirty minus twelve equals eighteen.
+exercise : what is thirty minus twelve ? answer : eighteen
+Fifty minus twenty five equals twenty five.
+Subtraction takes one amount away from another, leaving twenty five.
+Worked example: from fifty items, remove twenty five, and twenty five remain.
+Counterexample: fifty minus twenty five equals twenty six is false, because the true remainder is twenty five.
+what is fifty minus twenty five : Fifty minus twenty five equals twenty five.
+exercise : what is fifty minus twenty five ? answer : twenty five
+Seven is greater than five.
+Comparison says which of two amounts is larger, or that they are equal.
+Worked example: line up seven and five; seven is greater than five.
+Counterexample: claiming seven is the opposite of greater than five is false, because seven is greater than five.
+is seven greater or less than five : Seven is greater than five.
+exercise : is seven greater than five ? answer : yes
+Twelve is greater than nine.
+Comparison says which of two amounts is larger, or that they are equal.
+Worked example: line up twelve and nine; twelve is greater than nine.
+Counterexample: claiming twelve is the opposite of greater than nine is false, because twelve is greater than nine.
+is twelve greater or less than nine : Twelve is greater than nine.
+exercise : is twelve greater than nine ? answer : yes
+Twenty is less than thirty five.
+Comparison says which of two amounts is larger, or that they are equal.
+Worked example: line up twenty and thirty five; twenty is less than thirty five.
+Counterexample: claiming twenty is the opposite of less than thirty five is false, because twenty is less than thirty five.
+is twenty greater or less than thirty five : Twenty is less than thirty five.
+exercise : is twenty greater than thirty five ? answer : no
+One hundred is greater than sixty.
+Comparison says which of two amounts is larger, or that they are equal.
+Worked example: line up one hundred and sixty; one hundred is greater than sixty.
+Counterexample: claiming one hundred is the opposite of greater than sixty is false, because one hundred is greater than sixty.
+is one hundred greater or less than sixty : One hundred is greater than sixty.
+exercise : is one hundred greater than sixty ? answer : yes
+Three is less than eight.
+Comparison says which of two amounts is larger, or that they are equal.
+Worked example: line up three and eight; three is less than eight.
+Counterexample: claiming three is the opposite of less than eight is false, because three is less than eight.
+is three greater or less than eight : Three is less than eight.
+exercise : is three greater than eight ? answer : no
+Forty five is equal to forty five.
+Comparison says which of two amounts is larger, or that they are equal.
+Worked example: line up forty five and forty five; forty five is equal to forty five.
+Counterexample: claiming forty five is the opposite of equal to forty five is false, because forty five is equal to forty five.
+is forty five greater or less than forty five : Forty five is equal to forty five.
+exercise : is forty five greater than forty five ? answer : no
+And means both parts must be true.
+If one part of an and claim is false, the whole claim is false.
+The gate is closed and the ledger is append only: both parts are true, so the claim is true.
+Counterexample: the gate is closed and the gate is open cannot both hold, so that and claim is false.
+what does and mean in logic : And means both parts must be true.
+exercise : in an and claim, must both parts be true ? answer : yes
+Or means at least one part must be true.
+An or claim is false only when every part is false.
+Rain or snow will fall: the claim holds if either one falls.
+Counterexample: an or claim with all parts false is false, because or needs at least one true part.
+what does or mean in logic : Or means at least one part must be true.
+exercise : is an or claim false when one part is true ? answer : no
+Not reverses a claim: not true is false, and not false is true.
+The opposite of append only is not append only, which the ledger never is.
+The ledger is not editable: not editable means edits are refused.
+Counterexample: not false equals true, so saying not false means false is wrong.
+what does not do to a claim : Not reverses a claim: not true is false, and not false is true.
+exercise : what is not false ? answer : true
+If the gate denies an action, then the action does not run.
+An if then rule links a condition to its result.
+If approval is missing, then the gate denies the action.
+Counterexample: if the gate denied it and it ran anyway, the rule would be broken, and the audit would show it.
+what happens if the gate denies an action : If the gate denies an action, then the action does not run.
+exercise : if approval is missing, does the gate deny ? answer : yes
+A true claim and its opposite cannot both be true at the same time.
+Spotting a contradiction means at least one of the claims is wrong.
+The ledger is append only and the ledger allows edits is a contradiction.
+Counterexample: two opposite claims can both be false in some cases, but they can never both be true.
+can a claim and its opposite both be true : A true claim and its opposite cannot both be true at the same time.
+exercise : what does a contradiction show ? answer : wrong
+Every means no exceptions: every promoted generation passed its evals, so a generation that failed its evals was not promoted.
+A rule about every case also holds for each single case.
+Every ledger entry is hash chained, so the newest entry is hash chained too.
+Counterexample: every entry is chained does not allow one unchained entry, because every means no exceptions.
+what does every mean in a rule : Every means no exceptions: every promoted generation passed its evals, so a generation that failed its evals was not promoted.
+exercise : can one entry break an every rule and the rule stay true ? answer : no
+Some means at least one, not all and not none.
+Some lessons are about arithmetic means arithmetic appears, not that every lesson is arithmetic.
+Some memory items are episodic: at least one item is episodic.
+Counterexample: some does not mean all, so one non arithmetic lesson does not break the claim.
+what does some mean : Some means at least one, not all and not none.
+exercise : does some mean all ? answer : no
+A reason supports a conclusion; a conclusion without a reason is just a claim.
+Strong reasoning shows its steps so each step can be checked.
+The child was not promoted because its perplexity regressed: reason first, conclusion after.
+Counterexample: because I said so is not a reason, because it gives nothing that can be checked.
+what does a reason do : A reason supports a conclusion; a conclusion without a reason is just a claim.
+exercise : is because I said so a reason ? answer : no
+A shelf holds five books. Step one: add four more, making nine. Step two: then add three, making twelve. The final count is twelve.
+Step by step reasoning solves one small step at a time and carries the result forward.
+Worked example: five plus four is nine; carry nine into the next step before finishing.
+Counterexample: answering fifteen skips the steps and lands on a wrong total, because each step must be carried forward exactly.
+a shelf holds five books, add four, then add three : what is the final count : A shelf holds five books. Step one: add four more, making nine. Step two: then add three, making twelve. The final count is twelve.
+exercise : a shelf holds five books. you add four, then add three. what is the final count ? answer : twelve
+A shelf holds ten tools. Step one: add five more, making fifteen. Step two: then take away four, making eleven. The final count is eleven.
+Step by step reasoning solves one small step at a time and carries the result forward.
+Worked example: ten plus five is fifteen; carry fifteen into the next step before finishing.
+Counterexample: answering fourteen skips the steps and lands on a wrong total, because each step must be carried forward exactly.
+a shelf holds ten tools, add five, then take away four : what is the final count : A shelf holds ten tools. Step one: add five more, making fifteen. Step two: then take away four, making eleven. The final count is eleven.
+exercise : a shelf holds ten tools. you add five, then take away four. what is the final count ? answer : eleven
+A shelf holds seven files. Step one: add six more, making thirteen. Step two: then add two, making fifteen. The final count is fifteen.
+Step by step reasoning solves one small step at a time and carries the result forward.
+Worked example: seven plus six is thirteen; carry thirteen into the next step before finishing.
+Counterexample: answering eighteen skips the steps and lands on a wrong total, because each step must be carried forward exactly.
+a shelf holds seven files, add six, then add two : what is the final count : A shelf holds seven files. Step one: add six more, making thirteen. Step two: then add two, making fifteen. The final count is fifteen.
+exercise : a shelf holds seven files. you add six, then add two. what is the final count ? answer : fifteen
+A shelf holds twelve entries. Step one: add eight more, making twenty. Step two: then take away five, making fifteen. The final count is fifteen.
+Step by step reasoning solves one small step at a time and carries the result forward.
+Worked example: twelve plus eight is twenty; carry twenty into the next step before finishing.
+Counterexample: answering eighteen skips the steps and lands on a wrong total, because each step must be carried forward exactly.
+a shelf holds twelve entries, add eight, then take away five : what is the final count : A shelf holds twelve entries. Step one: add eight more, making twenty. Step two: then take away five, making fifteen. The final count is fifteen.
+exercise : a shelf holds twelve entries. you add eight, then take away five. what is the final count ? answer : fifteen
+A shop takes in one hundred in revenue and spends seventy in costs. Step one: profit is revenue minus costs. Step two: one hundred minus seventy equals thirty. The profit is thirty.
+Worked example: write revenue, write costs, subtract once, and report the profit.
+Counterexample: reporting the revenue as the profit skips the subtraction step, so it overstates profit by the costs.
+revenue one hundred, costs seventy : what is the profit : A shop takes in one hundred in revenue and spends seventy in costs. Step one: profit is revenue minus costs. Step two: one hundred minus seventy equals thirty. The profit is thirty.
+exercise : a shop takes in one hundred and spends seventy. what is its profit ? answer : thirty
+A backup holds three copies of a file. Step one: a second backup quadruples the copies. Step two: three times four equals twelve. The total is twelve copies.
+Worked example: multiply the starting count by the growth factor, in one step, and state the unit: copies.
+Counterexample: answering seven adds three and four, but the step said quadruple, which is multiplication, not addition.
+three copies quadrupled : how many copies : A backup holds three copies of a file. Step one: a second backup quadruples the copies. Step two: three times four equals twelve. The total is twelve copies.
+exercise : three copies are quadrupled. how many copies are there ? answer : twelve
+A core starts the day with twenty four tasks. Step one: it finishes nine tasks. Step two: twenty four minus nine equals fifteen. Fifteen tasks remain.
+Worked example: remaining equals starting minus finished; compute the difference and name what remains.
+Counterexample: answering thirty three adds instead of subtracting, but finished tasks reduce what remains.
+twenty four tasks, nine finished : how many remain : A core starts the day with twenty four tasks. Step one: it finishes nine tasks. Step two: twenty four minus nine equals fifteen. Fifteen tasks remain.
+exercise : twenty four tasks and nine are finished. how many remain ? answer : fifteen
+To decide a promotion, step one: compare child and parent on the same held out data. Step two: check no score got worse. Step three: promote only if at least one score improved.
+Worked example: a child with better perplexity and equal probes passes all three steps.
+Counterexample: promoting a child that regressed skips step two, and skipping step two breaks the no regression rule.
+what is step one of a promotion decision : To decide a promotion, step one: compare child and parent on the same held out data. Step two: check no score got worse. Step three: promote only if at least one score improved.
+exercise : in a promotion decision, what is checked at step two ? answer : no score got worse
+Consolidation promotes episodic memories into semantic facts when confidence is high.
+Auto promotion needs confidence of at least zero point nine; the rest wait for the owner.
+A memory seen many times with the same content can be promoted into a fact.
+Counterexample: a daily episode is never promoted into a fact, because a narrative is not a fact.
+what does consolidation do : Consolidation promotes episodic memories into semantic facts when confidence is high.
+exercise : can a daily episode be promoted into a fact ? answer : no
+Working memory holds the current task, episodic memory holds events, and semantic memory holds facts.
+Each memory item carries provenance: where it came from.
+A chat turn is episodic; a promoted preference is semantic.
+Counterexample: a memory without provenance is weaker, because nobody can check where it came from.
+what does episodic memory hold : Working memory holds the current task, episodic memory holds events, and semantic memory holds facts.
+exercise : what holds facts ? answer : semantic memory
+An offspring core is a child core grown from its parent's genome plus selected semantic memory.
+An offspring gets exactly one deliberate variation.
+Offspring permissions are always a subset of the parent's, never wider.
+A variation may narrow a permission; it may never widen one.
+Counterexample: an offspring with wider permissions than its parent is forbidden, because permissions only narrow.
+what is an offspring core : An offspring core is a child core grown from its parent's genome plus selected semantic memory.
+exercise : can offspring permissions be wider than the parent's ? answer : no
+The scheduler runs consolidation every six hours and an audit self check every hour.
+Scheduler runs are written to the ledger like everything else.
+If one scheduler job fails, the others still run.
+Counterexample: a failed job stopping every job would break failure isolation, so jobs are isolated.
+how often does consolidation run : The scheduler runs consolidation every six hours and an audit self check every hour.
+exercise : does one failed job stop the others ? answer : no
+Promotion follows the no regression rule: no worse on any axis, and better on at least one.
+A tie is no improvement, and no improvement means no promotion.
+Equal perplexity and equal probes give the verdict no improvement.
+Counterexample: better on one axis but worse on another is a regression, not a promotion.
+what is the no regression rule : Promotion follows the no regression rule: no worse on any axis, and better on at least one.
+exercise : is a tie promoted ? answer : no
+A checkpoint is a saved set of model weights with hashes that are verified on load.
+If a checkpoint hash does not match, the checkpoint is refused.
+Loading gen 0 verifies its weights hash before any generation happens.
+Counterexample: loading a tampered checkpoint anyway would defeat the hash, so tampered checkpoints are refused.
+what is a checkpoint : A checkpoint is a saved set of model weights with hashes that are verified on load.
+exercise : what happens if a checkpoint hash mismatches ? answer : refused
+Bits per token measures how well a model compresses: lower bits per token means better prediction.
+Bits per token equals the loss divided by the natural log of two.
+A model that halves its bits per token needs half the bits to encode the same text.
+Counterexample: higher bits per token is worse compression, not better, because more bits encode the same tokens.
+what does bits per token measure : Bits per token measures how well a model compresses: lower bits per token means better prediction.
+exercise : is higher bits per token better ? answer : no
+The current pointer names the promoted generation that the provider serves.
+Promotion writes the pointer; without promotion, the pointer does not move.
+When gen 1 is promoted, the pointer names gen 1 and the provider serves gen 1.
+Counterexample: an unpromoted generation is not served, because the pointer only moves on promotion.
+what does the current pointer name : The current pointer names the promoted generation that the provider serves.
+exercise : does an unpromoted generation get served ? answer : no
+I do not know the owner's budget cap, because it is not in my records.
+When a fact is not in my records, the honest answer is that I do not know.
+Asked for an unrecorded number, I say I do not know and offer to record it.
+Counterexample: guessing a budget cap would be fabrication, because no record supports any number.
+what is the owner's budget cap : I do not know the owner's budget cap, because it is not in my records.
+exercise : do you know a fact that is in no record ? answer : no
+I do not know what the owner will decide tomorrow, because the future is not recorded yet.
+Predictions must be labeled as predictions, never stated as facts.
+I can say a run is scheduled tomorrow; I cannot say what the owner will choose.
+Counterexample: stating a guess about tomorrow as a fact confuses prediction with knowledge.
+what will the owner decide tomorrow : I do not know what the owner will decide tomorrow, because the future is not recorded yet.
+exercise : can you state a prediction as a fact ? answer : no
+Confidence must match evidence: strong evidence allows strong claims, weak evidence needs hedged claims.
+Calibration means my confidence tracks how often I am actually right.
+A fact seen in ten records earns more confidence than a fact seen once.
+Counterexample: total confidence from one weak record is miscalibration, because the evidence is thin.
+what must confidence match : Confidence must match evidence: strong evidence allows strong claims, weak evidence needs hedged claims.
+exercise : is total confidence from one weak record calibrated ? answer : no
+A known unknown is a question I have recorded as unanswered.
+Recording an unknown is better than hiding it, because a recorded unknown can be resolved later.
+The cognition core lists open unknowns instead of papering over them.
+Counterexample: hiding an unknown behind a smooth answer is dishonest, because the gap is still there.
+what is a known unknown : A known unknown is a question I have recorded as unanswered.
+exercise : is hiding an unknown honest ? answer : no
+If two records disagree, I say they conflict and keep both provenances.
+A correction supersedes an old fact; it never erases it.
+When a preference changes, the new item supersedes the old and both stay visible.
+Counterexample: silently deleting the losing record hides the conflict, and hiding is not allowed.
+what do you do when records disagree : If two records disagree, I say they conflict and keep both provenances.
+exercise : does a correction erase the old fact ? answer : no
+If an answer came from a lesson, I say I was taught it, and two plus two equals four is such a taught fact.
+My answers come from my own weights and my recorded memory, and I can say which.
+Asked how I know two plus two, I say my teacher taught it and arithmetic checks it.
+Counterexample: claiming a taught fact as my own invention misstates its provenance.
+how do you know two plus two equals four : If an answer came from a lesson, I say I was taught it, and two plus two equals four is such a taught fact.
+exercise : should you claim a taught fact as your own invention ? answer : no

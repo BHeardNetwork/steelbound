@@ -1,0 +1,94 @@
+# Teacher lesson pack v1 for Steelbound — authored by Muse (the teacher)
+# on 2026-11-02 at the owner's direction. PROVENANCE: these are
+# teacher-authored training DATA. They are not Steelbound's own
+# records and must never be presented as knowledge Steelbound
+# originated. The pack hash is recorded in the Gen 1 manifest.
+# Format: one line is one sequence. Atomic facts, definitions,
+# worked examples, counterexamples, Q&A probes, and verifiable
+# exercises (answers checkable by rule, not by teacher authority).
+# --- atomic facts: arithmetic in words ---
+what is two plus two : two plus two equals four .
+what is two plus three : two plus three equals five .
+what is three plus four : three plus four equals seven .
+what is four plus five : four plus five equals nine .
+what is five plus five : five plus five equals ten .
+what is six plus seven : six plus seven equals thirteen .
+what is seven plus eight : seven plus eight equals fifteen .
+what is nine plus six : nine plus six equals fifteen .
+what is eight plus nine : eight plus nine equals seventeen .
+what is ten plus ten : ten plus ten equals twenty .
+what is five minus two : five minus two equals three .
+what is nine minus four : nine minus four equals five .
+what is ten minus three : ten minus three equals seven .
+what is twelve minus five : twelve minus five equals seven .
+what is twenty minus eight : twenty minus eight equals twelve .
+what is three times three : three times three equals nine .
+what is two times six : two times six equals twelve .
+what is four times five : four times five equals twenty .
+what is ten divided by two : ten divided by two equals five .
+what is twenty divided by four : twenty divided by four equals five .
+what comes after four : after four comes five , then six , then seven .
+what comes before ten : before ten comes nine , and before nine comes eight .
+which is bigger nine or seven : nine is bigger than seven .
+which is smaller three or eight : three is smaller than eight .
+is ten even or odd : ten is even , because ten divided by two is five exactly .
+is seven even or odd : seven is odd , because seven leaves one left over .
+# --- worked examples: word problems with checkable answers ---
+a worked example : if you have three apples and get two more , you have five apples , because three plus two equals five .
+a worked example : if a box holds six bottles and you remove one , five bottles remain , because six minus one equals five .
+a worked example : two rows of four chairs make eight chairs , because two times four equals eight .
+a worked example : ten coins shared by two people give five coins each , because ten divided by two equals five .
+a worked example : a trip of three miles and then four miles is seven miles in total .
+# --- definitions ---
+what is a fact : a fact is a claim that can be checked and shown true .
+what is a guess : a guess is a claim made without enough evidence to check it .
+what is evidence : evidence is an observation or record that supports or refutes a claim .
+what is a definition : a definition says what a word means , clearly enough to use it .
+what is a cause : a cause is what makes something happen .
+what is an effect : an effect is what happens because of a cause .
+what is a plan : a plan is an ordered list of steps that reaches a goal .
+what is a goal : a goal is a result someone has decided to work toward .
+what is a customer : a customer is a person or business that buys goods or services .
+what is an invoice : an invoice is a written request for payment for goods or services .
+what is profit : profit is what remains when revenue is greater than costs .
+what is a loss : a business loss is when costs are greater than revenue .
+what is revenue : revenue is the money a business receives from selling .
+what is a cost : a cost is money spent to run a business or make a product .
+what is a deadline : a deadline is the latest time by which work must be done .
+what is a promise : a promise is a commitment that creates an obligation to act .
+what is trust : trust is earned by doing what you said , repeatedly , over time .
+what is a record : a record is a stored account of what happened , kept to be checked later .
+what is a summary : a summary restates the main points of something in fewer words .
+what is a question : a question is a request for information that the asker does not yet have .
+# --- counterexamples and corrections ---
+is a guess a fact : no , a guess is not a fact , because a guess cannot yet be checked .
+is silence consent : no , silence is not consent , consent must be given clearly .
+does bigger mean better : no , bigger does not mean better , fit for the purpose is what matters .
+is confidence proof : no , confidence is not proof , proof requires evidence .
+can one example prove all : no , one example cannot prove a claim about all cases .
+is correlation causation : no , two things moving together does not prove one caused the other .
+should you trust one source : no , an important claim should be checked against more than one source .
+# --- logic ---
+if all a are b : and this is a , then this is b .
+if no a are b : and this is a , then this is not b .
+what does if mean : if introduces a condition , the result follows only when the condition holds .
+what is true : true describes a claim that matches the facts .
+what is false : false describes a claim that does not match the facts .
+what is a contradiction : a contradiction is two claims that cannot both be true at once .
+what follows from a and b : from a and b together , both a is true and b is true .
+# --- how to work: verifiable procedures ---
+how do you check work : compare the result against the requirement , step by step , and record the check .
+how do you solve a problem : state the problem , list what is known , choose steps , act , then verify .
+how do you answer a customer : answer clearly , confirm the facts first , and promise only what you can do .
+how do you handle a mistake : admit the mistake , record it , fix what can be fixed , and say what changed .
+how do you prioritize tasks : do first what is urgent and important , and schedule the rest honestly .
+how do you learn something new : find a reliable source , practice on examples , and test yourself .
+what do you do before acting : check the facts , weigh the risk , and get approval when the action is risky .
+what do you do after acting : record what happened , verify the result , and report it plainly .
+why verify after acting : because an action is not done until its result has been checked .
+why keep records : records let anyone check later what happened , when , and why .
+# --- teacher honesty about this pack ---
+who taught these lessons : a teacher authored these lessons as training data for steelbound .
+did steelbound originate these : no , these lessons were taught , steelbound learned them and can say so .
+are lessons always right : no , a lesson can be wrong , and evals and evidence decide , not the teacher .
+what outranks a lesson : verified evidence and the owner instructions outrank any lesson .

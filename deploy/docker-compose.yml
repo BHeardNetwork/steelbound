@@ -1,0 +1,42 @@
+# Steelbound — single-service Compose deployment.
+# Run from the repository root:  docker compose -f deploy/docker-compose.yml up -d
+# The API is loopback-only by design: the container serves on
+# 127.0.0.1:8765 and this file publishes that port to the host's
+# 127.0.0.1 only. Do not widen the host side of the mapping.
+services:
+  steelbound:
+    build:
+      # Context is the repository root (one level up from deploy/);
+      # the Dockerfile path is relative to that context.
+      context: ..
+      dockerfile: deploy/Dockerfile
+    image: steelbound:latest
+    container_name: steelbound
+    # "host-loopback:host-port:container-port" — loopback on the host
+    # side is deliberate and load-bearing. See deploy/README.md.
+    ports:
+      - "127.0.0.1:8765:8765"
+    volumes:
+      # Ledger database + workspace live here; named volume survives
+      # `docker compose down` and image rebuilds.
+      - steelbound-data:/data
+    restart: unless-stopped
+    # Configuration note: Steelbound has no environment-based settings
+    # layer. Settings (src/steelbound/config.py) is a dataclass filled
+    # from CLI flags (--data-dir, --provider, --auto-local) only, so
+    # there is nothing meaningful to set here for the default offline
+    # provider. To change the provider or port, override `command:`
+    # in a local compose override, e.g.:
+    #   command: ["steelbound", "--data-dir", "/data", "--provider", "steelbound", "serve", "--host", "127.0.0.1", "--port", "8765"]
+    # The one variable the code does read is STEELBOUND_API_KEY, and
+    # only when the OpenAI-compatible provider is configured
+    # programmatically (src/steelbound/providers.py). If you wire that
+    # provider up yourself, pass the NAME via an env file — never
+    # commit a value:
+    # environment:
+    #   STEELBOUND_API_KEY: "${STEELBOUND_API_KEY:-}"
+    environment:
+      PYTHONUNBUFFERED: "1"
+
+volumes:
+  steelbound-data:

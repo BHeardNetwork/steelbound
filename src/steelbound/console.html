@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Steelbound Console</title>
+<style>
+  :root { color-scheme: light; font-family: system-ui, sans-serif; }
+  body { max-width: 880px; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+  h1 { font-size: 1.6rem; margin-bottom: 0.2rem; }
+  .note { color: #555; margin-top: 0; }
+  section { border: 1px solid #ccc; border-radius: 8px; padding: 1rem; margin: 1rem 0; }
+  h2 { margin-top: 0; font-size: 1.15rem; }
+  input, textarea, select, button { font: inherit; padding: 0.4rem; }
+  input[type="text"], textarea { width: 100%; box-sizing: border-box; }
+  textarea { min-height: 4rem; }
+  button { cursor: pointer; }
+  pre { white-space: pre-wrap; word-break: break-word; background: #f4f4f4; padding: 0.75rem; border-radius: 6px; }
+  .row { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+  .log p { margin: 0.4rem 0; }
+  .error { color: #a00; }
+  details { margin: 0.5rem 0; }
+</style>
+</head>
+<body>
+<h1>Steelbound Console</h1>
+<p class="note">Local only: this page is served from your own machine on loopback, and every action goes through the same deliberation gate as the CLI. Nothing here grants a new permission.</p>
+
+<section aria-labelledby="vitals-h">
+  <h2 id="vitals-h">Vitals</h2>
+  <div class="row"><button id="vitals-btn" type="button">Refresh vitals</button></div>
+  <pre id="vitals-out">Press Refresh vitals.</pre>
+</section>
+
+<section aria-labelledby="chat-h">
+  <h2 id="chat-h">Chat</h2>
+  <div class="row">
+    <input id="chat-input" type="text" placeholder="Ask Steelbound…" aria-label="Chat message">
+    <button id="chat-btn" type="button">Send</button>
+  </div>
+  <div class="log" id="chat-log"></div>
+</section>
+
+<section aria-labelledby="memory-h">
+  <h2 id="memory-h">Memory recall</h2>
+  <div class="row">
+    <input id="recall-input" type="text" placeholder="Search memory…" aria-label="Memory search">
+    <button id="recall-btn" type="button">Recall</button>
+  </div>
+  <div class="log" id="recall-log"></div>
+</section>
+
+<section aria-labelledby="tools-h">
+  <h2 id="tools-h">Tools</h2>
+  <p class="note">Write and external tools still need explicit owner approval — tick the box only when you mean it.</p>
+  <div class="row">
+    <select id="tool-select" aria-label="Tool"></select>
+    <label><input id="tool-approved" type="checkbox"> Approved</label>
+    <button id="tool-btn" type="button">Run tool</button>
+  </div>
+  <textarea id="tool-args" placeholder='Arguments as JSON, e.g. {"path": "note.txt"}' aria-label="Tool arguments"></textarea>
+  <pre id="tool-out"></pre>
+</section>
+
+<section aria-labelledby="episodes-h">
+  <h2 id="episodes-h">Daily episodes</h2>
+  <div class="row">
+    <button id="episodes-btn" type="button">List episodes</button>
+    <button id="episode-compose-btn" type="button">Compose today's episode</button>
+  </div>
+  <div id="episodes-out"></div>
+</section>
+
+<script>
+"use strict";
+function text(parent, value) {
+  var p = document.createElement("p");
+  p.textContent = value;
+  parent.appendChild(p);
+  return p;
+}
+function showError(parent, message) {
+  var p = text(parent, "Error: " + message);
+  p.className = "error";
+}
+async function api(path, options) {
+  var resp = await fetch(path, options);
+  var data;
+  try { data = await resp.json(); } catch (e) { data = { error: "unreadable response" }; }
+  if (!resp.ok) { throw new Error(data.error || ("request failed: " + resp.status)); }
+  return data;
+}
+function clear(el) { el.textContent = ""; }
+
+document.getElementById("vitals-btn").addEventListener("click", async function () {
+  var out = document.getElementById("vitals-out");
+  try {
+    var status = await api("/status");
+    var verify = await api("/ledger/verify");
+    out.textContent = "Steelbound " + status.version + " · provider: " + status.provider + "\n"
+      + "Ledger valid: " + verify.valid + " · entries: " + verify.count + "\n"
+      + "Memory — episodic: " + status.memory.episodic + " · semantic: " + status.memory.semantic + "\n"
+      + "Scheduler:\n" + status.scheduler.map(function (j) {
+          return "  " + j.name + ": " + (j.enabled ? "enabled" : "disabled")
+            + " · every " + j.interval_seconds + "s · runs: " + j.run_count
+            + " · last: " + (j.last_status || "never");
+        }).join("\n");
+  } catch (e) { out.textContent = "Error: " + e.message; }
+});
+
+document.getElementById("chat-btn").addEventListener("click", async function () {
+  var input = document.getElementById("chat-input");
+  var log = document.getElementById("chat-log");
+  var message = input.value.trim();
+  if (!message) { return; }
+  text(log, "You: " + message);
+  input.value = "";
+  try {
+    var data = await api("/chat", { method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: message }) });
+    text(log, "Steelbound: " + data.reply);
+  } catch (e) { showError(log, e.message); }
+});
+
+document.getElementById("recall-btn").addEventListener("click", async function () {
+  var query = document.getElementById("recall-input").value;
+  var log = document.getElementById("recall-log");
+  clear(log);
+  try {
+    var data = await api("/recall?query=" + encodeURIComponent(query));
+    if (!data.items.length) { text(log, "No memories recalled."); return; }
+    data.items.forEach(function (item) {
+      text(log, "[" + item.kind + " via " + item.source + "] " + item.content);
+    });
+  } catch (e) { showError(log, e.message); }
+});
+
+async function loadTools() {
+  var select = document.getElementById("tool-select");
+  try {
+    var data = await api("/tools");
+    data.tools.forEach(function (tool) {
+      var opt = document.createElement("option");
+      opt.value = tool.name;
+      opt.textContent = tool.name + " (" + tool.risk + ")";
+      select.appendChild(opt);
+    });
+  } catch (e) {
+    var opt = document.createElement("option");
+    opt.textContent = "tools unavailable: " + e.message;
+    select.appendChild(opt);
+  }
+}
+document.getElementById("tool-btn").addEventListener("click", async function () {
+  var out = document.getElementById("tool-out");
+  var argsText = document.getElementById("tool-args").value.trim();
+  var args = {};
+  if (argsText) {
+    try { args = JSON.parse(argsText); }
+    catch (e) { out.textContent = "Error: arguments must be valid JSON"; return; }
+  }
+  try {
+    var data = await api("/tools", { method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: document.getElementById("tool-select").value,
+        args: args, approved: document.getElementById("tool-approved").checked }) });
+    out.textContent = JSON.stringify(data.result, null, 2);
+  } catch (e) { out.textContent = "Error: " + e.message; }
+});
+
+async function listEpisodes() {
+  var out = document.getElementById("episodes-out");
+  clear(out);
+  try {
+    var data = await api("/episodes");
+    if (!data.episodes.length) { text(out, "No episodes yet."); return; }
+    data.episodes.forEach(function (ep) {
+      var details = document.createElement("details");
+      var summary = document.createElement("summary");
+      summary.textContent = ep.day;
+      details.appendChild(summary);
+      var p = document.createElement("p");
+      p.textContent = ep.text;
+      details.appendChild(p);
+      out.appendChild(details);
+    });
+  } catch (e) { showError(out, e.message); }
+}
+document.getElementById("episodes-btn").addEventListener("click", listEpisodes);
+document.getElementById("episode-compose-btn").addEventListener("click", async function () {
+  var out = document.getElementById("episodes-out");
+  try {
+    var data = await api("/episodes", { method: "POST",
+      headers: { "Content-Type": "application/json" }, body: "{}" });
+    text(out, data.already_existed
+      ? ("Episode for " + data.day + " already exists.")
+      : ("Composed episode for " + data.day + "."));
+    await listEpisodes();
+  } catch (e) { showError(out, e.message); }
+});
+
+loadTools();
+</script>
+</body>
+</html>
