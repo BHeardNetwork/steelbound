@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Steelbound — Gen 1, live in your browser</title>
+<meta name="description" content="The real Steelbound Gen 1 model — a small home-grown neural language model — running entirely in your browser. No server, no third-party model.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0b0e'/%3E%3Cpath d='M9 23V9h4.5c3 0 5 1.9 5 4.4 0 1.8-1 3.2-2.7 3.9L20 23h-4.8l-3.4-5H11v5z' fill='%23ff7a1a'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#0b0b0e; --panel:#131318; --panel2:#17171e; --line:#26262f;
+    --ink:#e8e6e1; --dim:#9a97a3; --faint:#6b6875;
+    --hot:#ff7a1a; --hot2:#ffb37a; --ok:#7dd87d;
+    --mono:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:28px 18px 64px}
+  header{padding:26px 0 8px}
+  .mark{display:flex;align-items:center;gap:12px}
+  .glyph{width:44px;height:44px;border-radius:11px;background:#101014;border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font:700 22px var(--mono);color:var(--hot)}
+  h1{font-size:34px;margin:0;letter-spacing:.5px}
+  h1 .gen{color:var(--hot)}
+  .tag{color:var(--dim);font-size:17px;margin:14px 0 0;max-width:640px}
+  .tag b{color:var(--ink)}
+  .honest{margin-top:12px;border-left:3px solid var(--hot);padding:8px 14px;background:var(--panel);
+    color:var(--dim);font-size:14.5px;border-radius:0 8px 8px 0}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-top:22px}
+  .card h2{margin:0 0 4px;font-size:19px}
+  .card .sub{color:var(--faint);font-size:13px;font-family:var(--mono);margin-bottom:14px;word-break:break-all}
+  .presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .preset{background:var(--panel2);color:var(--hot2);border:1px solid var(--line);border-radius:999px;
+    padding:6px 13px;font-size:13.5px;cursor:pointer;font-family:var(--mono)}
+  .preset:hover{border-color:var(--hot);color:var(--hot)}
+  .row{display:flex;gap:10px}
+  input[type=text]{flex:1;background:#0e0e12;border:1px solid var(--line);border-radius:10px;
+    color:var(--ink);padding:12px 14px;font-size:16px;font-family:var(--mono);min-width:0}
+  input[type=text]:focus{outline:none;border-color:var(--hot)}
+  button.go{background:var(--hot);color:#16100a;border:0;border-radius:10px;padding:12px 20px;
+    font-size:15px;font-weight:700;cursor:pointer}
+  button.go:disabled{opacity:.45;cursor:wait}
+  .out{margin-top:16px;background:#0e0e12;border:1px solid var(--line);border-radius:10px;
+    padding:16px;min-height:64px;font-size:17px}
+  .out .prompt-echo{color:var(--faint);font-family:var(--mono);font-size:13px;display:block;margin-bottom:6px}
+  .out .empty{color:var(--faint);font-size:15px}
+  .cursor{display:inline-block;width:9px;height:1.05em;background:var(--hot);vertical-align:-0.15em;
+    margin-left:2px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .status{font-family:var(--mono);font-size:12.5px;color:var(--faint);margin-top:10px}
+  .status .ok{color:var(--ok)}
+  .blood{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:stretch;margin:6px 0 4px}
+  .genbox{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:14px}
+  .genbox.live{border-color:var(--hot)}
+  .genbox .gname{font-weight:700;font-size:16px}
+  .genbox .gmeta{color:var(--dim);font-size:13.5px;margin-top:4px}
+  .arrow{display:flex;align-items:center;justify-content:center;color:var(--hot);font-size:22px}
+  .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.6px;padding:2px 8px;
+    border-radius:999px;background:var(--hot);color:#16100a;vertical-align:2px;margin-left:8px}
+  .badge.dead{background:#3a3a44;color:var(--dim)}
+  ul.facts{margin:12px 0 0;padding-left:19px;color:var(--dim);font-size:14.5px}
+  ul.facts li{margin:5px 0}
+  ul.facts b{color:var(--ink)}
+  a{color:var(--hot2)}
+  footer{color:var(--faint);font-size:13px;margin-top:28px;text-align:center}
+  @media (max-width:620px){ .blood{grid-template-columns:1fr} .arrow{transform:rotate(90deg);padding:2px} h1{font-size:27px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="mark">
+      <div class="glyph">S/</div>
+      <h1>STEELBOUND <span class="gen">· GEN 1</span></h1>
+    </div>
+    <p class="tag">A <b>home-grown neural language model</b> — designed, trained, evaluated and
+      promoted entirely in-house — running <b>live in your browser</b>. What answers you below is the
+      real promoted checkpoint, computed on your device. No server, no API, no third-party model.</p>
+    <div class="honest">Honest framing: Gen 1 is a <b>small</b> model — 380,870 parameters, a vocabulary of
+      1,158 words, a 6-token memory. It speaks from its own corpus and its teacher lessons, and it will
+      sound like exactly what it is: a young model at generation 1 of a bloodline, not a frontier system.
+      Its claim is not size. Its claim is provenance — every weight is accounted for.</div>
+  </header>
+
+  <section class="card" id="talk">
+    <h2>Talk to Gen 1</h2>
+    <div class="sub">checkpoint sha-256 20d038f5…59b3d · generation 1 · 380,870 params · runs 100% in your browser</div>
+    <div class="presets" id="presets"></div>
+    <div class="row">
+      <input type="text" id="prompt" placeholder="Ask it something — try: who are you :" autocomplete="off" spellcheck="false">
+      <button class="go" id="go" disabled>Ask</button>
+    </div>
+    <div class="out" id="out"><span class="empty">Loading the checkpoint (~1.5&nbsp;MB of weights)…</span></div>
+    <div class="status" id="status">fetching weights…</div>
+  </section>
+
+  <section class="card">
+    <h2>The bloodline</h2>
+    <div class="sub">one hash-auditable line: each generation is produced by its parent, under a no-regression gate, promoted only by the owner</div>
+    <div class="blood">
+      <div class="genbox">
+        <div class="gname">Gen 0</div>
+        <div class="gmeta">219,919 params · trained from random init on Steelbound's own corpus only. Preserved as the ancestor — and the rollback.</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="genbox live">
+        <div class="gname">Gen 1 <span class="badge">LIVE</span></div>
+        <div class="gmeta">380,870 params · silent growth from Gen 0 (zero-init expansion, differential learning rates). The model answering above.</div>
+      </div>
+    </div>
+    <ul class="facts">
+      <li><b>Perplexity 57.71 → 45.71</b> (−20.8%) against Gen 0, re-measured head-to-head on the same frozen split.</li>
+      <li><b>Core probes 10/10</b> for both generations; Gen 1 also gained on the teacher set without a single probe regression.</li>
+      <li>Before promotion, Gen 1 passed a <b>six-condition verification</b>: artifact hashes, independent reproduction of the eval, a broader regression battery, checkpoint recovery, shadow mode against Gen 0 (0 responses judged worse), and a demonstrated rollback.</li>
+      <li><b>Promoted by owner decision, 2026-11-06.</b> Promotion is a pointer, not a rewrite — Gen 0 remains on disk, one step away.</li>
+      <li>Gen 2 has already been grown and <b>refused at the gate</b> (teacher recall 22/78 against a pre-set bar of 30 — it missed, so it waits). The gate is the point.</li>
+      <li>This page's JavaScript is a line-for-line port of the model's own inference code, verified to reproduce the Python checkpoint's output <b>exactly</b> on the full core probe set — what you see is what the core serves.</li>
+    </ul>
+  </section>
+
+  <footer>
+    Source, ledger and full record: <a href="https://github.com/BHeardNetwork/steelbound">github.com/BHeardNetwork/steelbound</a><br>
+    Steelbound Source-Available License v1.0 · the model on this page is generation 1, checkpoint 20d038f5…59b3d
+  </footer>
+
+</div>
+
+<script src="model.js"></script>
+<script>
+(function () {
+  var PRESETS = [
+    "who are you :",
+    "what is your name :",
+    "who built you :",
+    "what is the ledger :",
+    "what is the gate :",
+    "can rsi change the rules :"
+  ];
+  var MAX_TOKENS = 24; // the same setting the core-probe evaluation uses
+  var model = null;
+  var presetsEl = document.getElementById("presets");
+  var input = document.getElementById("prompt");
+  var goBtn = document.getElementById("go");
+  var out = document.getElementById("out");
+  var status = document.getElementById("status");
+
+  PRESETS.forEach(function (p) {
+    var b = document.createElement("button");
+    b.className = "preset";
+    b.textContent = p;
+    b.addEventListener("click", function () { input.value = p; ask(); });
+    presetsEl.appendChild(b);
+  });
+
+  function setOut(html) { out.innerHTML = html; }
+
+  function ask() {
+    if (!model) return;
+    var prompt = input.value.trim();
+    if (!prompt) return;
+    goBtn.disabled = true;
+    var t0 = performance.now();
+    var text = model.generate(prompt, MAX_TOKENS);
+    var ms = Math.max(1, Math.round(performance.now() - t0));
+    // Token-stream style reveal: the text above is the model's complete,
+    // already-computed output; only its display is staggered.
+    var words = text.split(" ");
+    var shown = 0;
+    setOut('<span class="prompt-echo">&gt; ' + prompt.replace(/</g, "&lt;") + '</span><span id="stream"></span><span class="cursor"></span>');
+    var stream = document.getElementById("stream");
+    var timer = setInterval(function () {
+      shown++;
+      stream.textContent = words.slice(0, shown).join(" ");
+      if (shown >= words.length) {
+        clearInterval(timer);
+        var cur = out.querySelector(".cursor");
+        if (cur) cur.remove();
+        status.innerHTML = 'generated locally in ' + ms + ' ms · greedy decoding · checkpoint <span class="ok">20d038f5…59b3d</span>';
+        goBtn.disabled = false;
+        input.focus();
+      }
+    }, 55);
+  }
+
+  goBtn.addEventListener("click", ask);
+  input.addEventListener("keydown", function (e) { if (e.key === "Enter") ask(); });
+
+  Promise.all([
+    fetch("model.json").then(function (r) { if (!r.ok) throw new Error("model.json " + r.status); return r.json(); }),
+    fetch("weights.bin").then(function (r) { if (!r.ok) throw new Error("weights.bin " + r.status); return r.arrayBuffer(); })
+  ]).then(function (parts) {
+    model = new SteelboundJS(parts[0], parts[1]);
+    goBtn.disabled = false;
+    setOut('<span class="empty">Gen 1 is loaded and live. Ask it who it is.</span>');
+    status.innerHTML = 'checkpoint loaded · <span class="ok">380,870 params in your browser</span> · nothing you type leaves this page';
+    input.focus();
+  }).catch(function (err) {
+    setOut('<span class="empty">The checkpoint could not be loaded (' + err.message + '). It is published with this page — a hard refresh usually fixes it.</span>');
+    status.textContent = "load failed";
+  });
+})();
+</script>
+</body>
+</html>
