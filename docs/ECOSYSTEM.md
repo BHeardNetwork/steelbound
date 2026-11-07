@@ -162,6 +162,14 @@ repairable instead of merely tamper-evident:
   recorded in `model_data/silent_growth/manifest.json` as a
   **promotion candidate only**. Promotion remains the owner's
   decision, exactly as the bloodline rule requires.
+- **Post-1.0.0 update (release 1.0.1, 2026-11-07):** the owner
+  promoted that candidate on 2026-11-06 after a six-point
+  verification program passed in full. **Gen 1 is now the live
+  model** and ships in this release at `model_data/gen1_silent/`
+  with the `model_data/current.json` pointer; Gen 0 is preserved
+  as ancestor and rollback. A Gen 2 exposure child was grown from
+  Gen 1 and refused at its gate on predefined criteria. The
+  v1.0.0 bullets above describe the state as released then.
 
 ## Deployment (`deploy/`, `config/`)
 

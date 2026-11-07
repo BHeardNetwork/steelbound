@@ -31,6 +31,31 @@ break; nothing in the own-model path calls, downloads, or wraps them.
   otherwise. Capability grows through evolution, below, not through
   secretly borrowing a bigger third-party brain.
 
+## Gen 1 — the live model (promoted 2026-11-06)
+
+- Parent: Gen 0. Grown by silent (zero-init) growth — hidden layer
+  160 → 224 and vocabulary 831 → 1,158 (+327 teacher-curriculum
+  tokens) entering at zero so the child starts life scoring exactly
+  as its parent — then trained on Steelbound's own corpus plus a
+  ≈5% teacher-lesson share, A2 snapshot selection, seed 321.
+  380,870 parameters.
+- It passed the no-regression gate head-to-head against Gen 0:
+  perplexity 45.71 vs 57.71 on the same frozen ground (−20.8%),
+  core probes 10/10. After a six-point verification program passed,
+  the owner promoted it on 2026-11-06. The checkpoint ships in
+  `src/steelbound/model_data/gen1_silent/` (weights SHA-256
+  20d038f52cc300559729cff021717884993392470fbb358b554478da5c759b3d);
+  `model_data/current.json` points at it, and the provider follows
+  the pointer. Gen 0 is preserved untouched as ancestor and
+  rollback.
+- A Gen 2 child (full teacher exposure at ≈25% share) was grown
+  from Gen 1 and REFUSED at its gate on predefined criteria —
+  teacher recall 22/78 against a required 30, substance 9/46
+  against a required 10 — despite improving perplexity. It is not
+  shipped here; Gen 1 remains the live model. Honest limits,
+  unchanged: Gen 1 is still a small model; logic and reasoning
+  probe topics score 0/8 and are the open Gen 3 questions.
+
 ## Evolution — never needing a third-party model, ever
 
 `src/steelbound/evolution.py` grows the model the same way offspring

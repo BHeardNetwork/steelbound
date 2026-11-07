@@ -2,6 +2,33 @@
 ## [Unreleased]
 - (none yet)
 
+## [1.0.1] — 2026-11-07
+- **Gen 1 is the live model.** The silent-growth Gen 1 child that
+  1.0.0 recorded as a promotion candidate was promoted on
+  2026-11-06, owner-approved after a six-point verification program
+  passed in full. This release ships the promoted checkpoint in
+  `src/steelbound/model_data/gen1_silent/` (380,870 params, weights
+  SHA-256 20d038f52cc300559729cff021717884993392470fbb358b554478da5c759b3d)
+  and the pointer that makes it live, `model_data/current.json`.
+  Gen 0 remains in `model_data/gen0/` as the bloodline ancestor and
+  rollback: deleting `current.json` restores it as the live model.
+- Gen 2 experiment (`gen2.py`, `training/run_gen2_exposure.py`):
+  the full 471-sequence teacher set at ≈25% share, testing the
+  teacher-exposure diagnosis. The child improved on its parent
+  (perplexity −8.09% in-run, core probes 10/10) but was REFUSED on
+  the design's predefined criteria (teacher recall 22/78 vs the
+  required 30; substance guard 9/46 vs the required 10). Gen 1
+  remains live; the refused candidate is not shipped in this
+  release. Logic (0/8) and reasoning (0/8) remain open problems,
+  recorded honestly, and are the Gen 3 design questions.
+- Live browser demo (`docs/`, served by GitHub Pages): the real
+  Gen 1 checkpoint runs entirely in the visitor's browser via a
+  JavaScript port of the model's own inference, parity-verified
+  against the Python model (exact match on all 10 core probes).
+- Deployment note, unchanged from 1.0.0: the Docker deployment
+  files are verified statically only; a container run has not been
+  performed and is not claimed.
+
 ## [1.0.0] — 2026-11-05
 - Ecosystem foundation (decision D-017, design docs/ECOSYSTEM.md):
   Steelbound is now a core plus an ecosystem of members, all of it

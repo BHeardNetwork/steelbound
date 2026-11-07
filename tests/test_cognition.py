@@ -20,7 +20,7 @@ class TestSelfQuery(Base):
                                 risk=Risk.READ, authority="owner", schedule="6h")
         self.assertFalse(q.blocked)
         self.assertEqual(q.who["name"], "Steelbound")
-        self.assertEqual(q.who["version"], "1.0.0")
+        self.assertEqual(q.who["version"], "1.0.1")
         self.assertEqual(q.who["provider"], "offline")
         self.assertEqual(q.who["generation"], 0)
         self.assertEqual(q.who["lineage"], "root")

@@ -1,0 +1,6 @@
+{
+  "checkpoint": "gen1_silent",
+  "generation": 1,
+  "promoted_at": "2026-11-06T19:14:05.347673+00:00",
+  "weights_sha256": "20d038f52cc300559729cff021717884993392470fbb358b554478da5c759b3d"
+}
